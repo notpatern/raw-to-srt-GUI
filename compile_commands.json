@@ -1,0 +1,8 @@
+[
+{
+  "directory": "F:/work/raw-to-srt-GUI/build",
+  "command": "C:\\w64devkit\\bin\\g++.exe  @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\src\\main.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\src\\main.cpp",
+  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.obj"
+}
+]
