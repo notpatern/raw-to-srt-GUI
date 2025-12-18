@@ -23,7 +23,7 @@ struct Config {
     bool multicast;
 };
 
-bool LoadConfig(std::string_view fileName, Config& config) {
+inline bool LoadConfig(std::string_view fileName, Config& config) {
     std::ifstream dataFile(fileName.data());
     nlohmann::json data;
 
@@ -50,29 +50,28 @@ bool LoadConfig(std::string_view fileName, Config& config) {
     return true;
 }
 
-void SaveConfig(std::string_view fileName, Config& config) {
+inline void SaveConfig(std::string_view fileName, Config& config) {
     nlohmann::json json{
         {"audio_device", config.audioDevice},
-        {"video_device", config.videoBitrate,
-        {"video_bitrate", config.outputIP},
-        {"output_ip", config.outputPort},
-        {"output_port", config.transport},
-        {"transport", config.gopLength},
-        {"gop_length", config.performance},
-        {"performance", config.profile},
-        {"profile", config.entropyMode},
+        {"video_device", config.videoDevice},
+        {"video_bitrate", config.videoBitrate},
+        {"output_ip", config.outputIP},
+        {"output_port", config.outputPort},
+        {"transport", config.transport},
+        {"gop_length", config.gopLength},
+        {"performance", config.performance},
+        {"profile", config.profile},
+        {"entropy_mode", config.entropyMode},
         {"picture_mode", config.pictureMode},
         {"bitrate_mode", config.bitrateMode},
         {"multicast", config.multicast}
-    }};
-
+    };
     std::ofstream dataFile(fileName.data());
     if (!dataFile.is_open()) {
         std::cerr << "config could not be saved, file did not open\n\r";
+        return;
     }
-
-    dataFile << json;
-
+    dataFile << json.dump(4);  // Added: pretty print with 4 spaces
     return;
 }
 

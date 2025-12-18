@@ -1,17 +1,35 @@
+#set(CMAKE_TOOLCHAIN_FILE "C:/Users/rodie/vcpkg/scripts/buildsystems/vcpkg.cmake")
+
 cmake_minimum_required(VERSION 3.10)
 
 project(raw-to-srt-GUI VERSION 0.0)
 
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(GLOB_RECURSE SRC_FILES "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/**.cpp"
-    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/**.h")
+find_package(Vulkan REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 
-include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/imgui"
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/imgui")
+file(GLOB_RECURSE IMGUI_SOURCES
+    "${IMGUI_DIR}/*.cpp"
+)
+
+file(GLOB_RECURSE SRC_FILES
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/*.cpp"
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/*.h"
+)
+
+add_executable(${PROJECT_NAME} ${SRC_FILES} ${IMGUI_SOURCES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/imgui"
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/GLFW"
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/raw-to-srt"
-    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/nlohmann")
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/nlohmann"
+)
 
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan glfw)
+

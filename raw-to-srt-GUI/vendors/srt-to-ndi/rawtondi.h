@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdlib>
 #include <string>
 #include <iostream>
@@ -21,7 +23,7 @@
 #endif
 
 namespace RawToSrt {
-int run(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
+inline int run(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
         int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast) {
 
     std::ifstream cfgFile("config.json");
