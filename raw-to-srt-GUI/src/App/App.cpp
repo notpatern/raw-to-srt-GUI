@@ -326,6 +326,11 @@ App::~App() {
 void App::run() {
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    if (!ConfigHelper::LoadConfig("config.json", m_config)) {
+        std::cerr << "Could not load config, closing.";
+        return;
+    }
+
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -383,30 +388,38 @@ void App::run() {
 
             ImGui::InputInt("Output Port", &m_config.outputPort);
 
-            const char* transportItems[] = { "UDP", "SRT" };
+            const char* transportItems[] = { "0", "UDP", "2", "3", "SRT" };
             ImGui::Combo("Transport", &m_config.transport, transportItems, IM_ARRAYSIZE(transportItems));
 
             ImGui::InputInt("GOP Length", &m_config.gopLength);
 
-            ImGui::InputInt("Performance", &m_config.performance, 0, 100);
+            ImGui::InputInt("Performance", &m_config.performance, 0, 3);
 
-            const char* profileItems[] = { "Baseline", "Main", "High" };
-            ImGui::Combo("Profile", &m_config.profile, profileItems, IM_ARRAYSIZE(profileItems));
+            ImGui::InputInt("Profile", &m_config.profile, 0, 100);
 
             const char* entropyItems[] = { "CAVLC", "CABAC" };
             ImGui::Combo("Entropy Mode", &m_config.entropyMode, entropyItems, IM_ARRAYSIZE(entropyItems));
 
-            const char* pictureModeItems[] = { "Progressive", "Interlaced" };
+            const char* pictureModeItems[] = { "Interlaced", "Progressive" };
             ImGui::Combo("Picture Mode", &m_config.pictureMode, pictureModeItems, IM_ARRAYSIZE(pictureModeItems));
 
-            const char* bitrateModeItems[] = { "CBR", "VBR" };
+            const char* bitrateModeItems[] = { "CQP", "VBR", "CBR" };
             ImGui::Combo("Bitrate Mode", &m_config.bitrateMode, bitrateModeItems, IM_ARRAYSIZE(bitrateModeItems));
 
             ImGui::Checkbox("Multicast", &m_config.multicast);
 
             ImGui::Separator();
             if (ImGui::Button("Run")) {
-                //RawToSrt::run();
+                RawToSrt::run(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.outputIP,
+                              m_config.outputPort, m_config.transport, m_config.gopLength, m_config.performance,
+                              m_config.profile, m_config.entropyMode, m_config.pictureMode, m_config.bitrateMode,
+                              m_config.multicast);
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button("Save Config")) {
+                ConfigHelper::SaveConfig("config.json", m_config);
             }
             ImGui::End();
         }
