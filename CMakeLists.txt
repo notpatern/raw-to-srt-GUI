@@ -1,5 +1,3 @@
-#set(CMAKE_TOOLCHAIN_FILE "C:/Users/rodie/vcpkg/scripts/buildsystems/vcpkg.cmake")
-
 cmake_minimum_required(VERSION 3.10)
 
 project(raw-to-srt-GUI VERSION 0.0)
@@ -29,6 +27,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/GLFW"
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/raw-to-srt"
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/nlohmann"
+    "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/TinyProcessLib"
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan glfw)

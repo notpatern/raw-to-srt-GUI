@@ -245,20 +245,21 @@ static ImGui_ImplGlfw_Data* ImGui_ImplGlfw_GetBackendData(GLFWwindow* window)
 // Functions
 static bool ImGui_ImplGlfw_IsWayland()
 {
-#if !GLFW_HAS_WAYLAND
-    return false;
-#elif GLFW_HAS_GETPLATFORM
-    return glfwGetPlatform() == GLFW_PLATFORM_WAYLAND;
-#else
-    const char* version = glfwGetVersionString();
-    if (strstr(version, "Wayland") == NULL) // e.g. Ubuntu 22.04 ships with GLFW 3.3.6 compiled without Wayland
-        return false;
-#ifdef GLFW_EXPOSE_NATIVE_X11
-    if (glfwGetX11Display() != NULL)
-        return false;
-#endif
-    return true;
-#endif
+	return false;
+//#if !GLFW_HAS_WAYLAND
+//    return false;
+//#elif GLFW_HAS_GETPLATFORM
+//    return glfwGetPlatform() == GLFW_PLATFORM_WAYLAND;
+//#else
+//    const char* version = glfwGetVersionString();
+//    if (strstr(version, "Wayland") == NULL) // e.g. Ubuntu 22.04 ships with GLFW 3.3.6 compiled without Wayland
+//        return false;
+//#ifdef GLFW_EXPOSE_NATIVE_X11
+//    if (glfwGetX11Display() != NULL)
+//        return false;
+//#endif
+//    return true;
+//#endif
 }
 
 // Not static to allow third-party code to use that if they want to (but undocumented)

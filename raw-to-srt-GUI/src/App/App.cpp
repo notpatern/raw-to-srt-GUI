@@ -321,6 +321,9 @@ App::~App() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
+
+    streamRunning = false;
+    runner.stop();
 }
 
 void App::run() {
@@ -408,19 +411,34 @@ void App::run() {
 
             ImGui::Checkbox("Multicast", &m_config.multicast);
 
+            if (ImGui::Button("Save Config")) {
+                ConfigHelper::SaveConfig("config.json", m_config);
+            }
+
             ImGui::Separator();
+
             if (ImGui::Button("Run")) {
-                RawToSrt::run(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.outputIP,
-                              m_config.outputPort, m_config.transport, m_config.gopLength, m_config.performance,
-                              m_config.profile, m_config.entropyMode, m_config.pictureMode, m_config.bitrateMode,
-                              m_config.multicast);
+                if (!streamRunning.load() && !runner.is_running()) {
+                    streamRunning = true;
+                    runThread = std::thread([this]() {
+                        if (runner.start(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.outputIP,
+                                         m_config.outputPort, m_config.transport, m_config.gopLength, m_config.performance,
+                                         m_config.profile, m_config.entropyMode, m_config.pictureMode, m_config.bitrateMode,
+                                         m_config.multicast)) {
+                            runner.wait();
+                        }
+                        streamRunning = false;
+                    });
+                }
             }
 
             ImGui::SameLine();
 
-            if (ImGui::Button("Save Config")) {
-                ConfigHelper::SaveConfig("config.json", m_config);
+            if (ImGui::Button("Stop")) {
+                runner.stop();
+                streamRunning = false;
             }
+
             ImGui::End();
         }
 

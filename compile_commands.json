@@ -1,50 +1,50 @@
 [
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\src\\App\\App.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\src\\App\\App.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\src\\main.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\src\\main.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui_draw.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui_draw.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui_impl_glfw.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui_impl_glfw.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui_impl_vulkan.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui_impl_vulkan.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui_tables.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui_tables.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.o"
 },
 {
-  "directory": "F:/work/raw-to-srt-GUI/build",
-  "command": "C:\\w64devkit\\bin\\g++.exe -DGLFW_DLL @CMakeFiles/raw-to-srt-GUI.dir/includes_CXX.rsp -g -Wno-format-security -Wno-deprecated-declarations -Wno-format-nonliteral -g -std=c++23 -o CMakeFiles\\raw-to-srt-GUI.dir\\raw-to-srt-GUI\\vendors\\imgui\\imgui_widgets.cpp.obj -c F:\\work\\raw-to-srt-GUI\\raw-to-srt-GUI\\vendors\\imgui\\imgui_widgets.cpp",
-  "file": "F:/work/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
-  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.obj"
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.o"
 }
 ]

@@ -4,7 +4,10 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <memory>
+#include <atomic>
 #include "../nlohmann/json.hpp"
+#include "../TinyProcessLib/process.hpp"
 
 #ifdef _WIN32
     #define VIDEO_SOURCE "mfvideosrc"
@@ -23,13 +26,34 @@
 #endif
 
 namespace RawToSrt {
-inline int run(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
-        int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast) {
+
+class Runner {
+public:
+    std::unique_ptr<TinyProcessLib::Process> process;
+    std::atomic<int> exit_status{-1};
+
+    Runner() = default;
+    ~Runner() { stop(); }
+
+    bool start(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
+               int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast);
+
+    void stop();
+
+    bool is_running() const { return process && exit_status.load() == -1; }
+
+    int wait();
+};
+
+inline bool Runner::start(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
+                          int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast) {
+
+    stop();
 
     std::ifstream cfgFile("config.json");
     if (!cfgFile.is_open()) {
         std::cerr << "config.json not in current directory\n";
-        return 1;
+        return false;
     }
 
     nlohmann::json cfg;
@@ -37,7 +61,7 @@ inline int run(std::string audioDevice, std::string videoDevice, int videoBitrat
         cfgFile >> cfg;
     } catch (const std::exception& e) {
         std::cerr << "error parsing config.json: " << e.what() << "\n";
-        return 1;
+        return false;
     }
 
     std::string sinkConfig;
@@ -53,7 +77,7 @@ inline int run(std::string audioDevice, std::string videoDevice, int videoBitrat
                      " interface=" + outputIP + " rc-mode=0";
     } else {
         std::cerr << "Invalid transport mode. Use 1 for UDP or 4 for SRT\n";
-        return 1;
+        return false;
     }
 
 #ifdef _WIN32
@@ -129,16 +153,31 @@ inline int run(std::string audioDevice, std::string videoDevice, int videoBitrat
     std::cout << "\n=== Running Pipeline ===\n";
     std::cout << command << "\n\n";
 
-    int result = std::system(command.c_str());
+#ifdef _WIN32
+    process = std::make_unique<TinyProcessLib::Process>(command, "", nullptr, nullptr);
+#else
+    process = std::make_unique<TinyProcessLib::Process>("/bin/sh",
+        std::vector<std::string>{"sh", "-c", command},
+        "", nullptr, nullptr);
+#endif
 
-    if (result == 0) {
-        std::cout << "\nPipeline completed successfully\n";
-    } else {
-        std::cerr << "\nPipeline error, exit code: " << result << "\n";
+    exit_status = -1;
+    return true;
+}
+
+inline void Runner::stop() {
+    if (process) {
+        process->kill();
+        process->close_stdin();
+        wait();
     }
-
-    return result;
 }
 
+inline int Runner::wait() {
+    if (process) {
+        exit_status = process->get_exit_status();
+        process.reset();
+    }
+    return exit_status.load();
 }
-
+}
