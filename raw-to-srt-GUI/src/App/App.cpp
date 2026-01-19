@@ -1,8 +1,10 @@
 #include "App.h"
 
 #include "../../vendors/imgui/imgui.h"
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 #include "../../vendors/imgui/imgui_impl_glfw.h"
 #include "../../vendors/GLFW/glfw3.h"
 #define GLFW_INCLUDE_NONE
@@ -307,6 +309,13 @@ static void FramePresent(ImGui_ImplVulkanH_Window* wd)
     wd->SemaphoreIndex = (wd->SemaphoreIndex + 1) % wd->SemaphoreCount; // Now we can use the next set of semaphores
 }
 
+void App::BufferConsoleOutput(const std::string& line) {
+    consoleBuffer.push_back(line);
+    if (consoleBuffer.size() > MAX_CONSOLE_LINES) {
+        consoleBuffer.pop_front();
+    }
+}
+
 App::App() {
     Init();
 }
@@ -322,8 +331,8 @@ App::~App() {
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    streamRunning = false;
     runner.stop();
+    streamRunning = false;
 }
 
 void App::run() {
@@ -382,6 +391,8 @@ void App::run() {
 
             ImGui::InputInt("Video Bitrate (kbps)", &m_config.videoBitrate);
 
+            ImGui::InputInt("Video Framerate", &m_config.videoFramerate);
+
             static char outputIPBuffer[64] = "";
             if (outputIPBuffer[0] == '\0' && !m_config.outputIP.empty()) {
                 std::strncpy(outputIPBuffer, m_config.outputIP.c_str(), sizeof(outputIPBuffer) - 1);
@@ -391,14 +402,239 @@ void App::run() {
 
             ImGui::InputInt("Output Port", &m_config.outputPort);
 
-            const char* transportItems[] = { "0", "UDP", "2", "3", "SRT" };
-            ImGui::Combo("Transport", &m_config.transport, transportItems, IM_ARRAYSIZE(transportItems));
+            int transport = 0;
+            switch (m_config.transport) {
+                case 1:
+                    transport = 0;
+                break;
+                case 4:
+                    transport = 1;
+                break;
+            }
+            const char* transportItems[] = { "UDP", "SRT" };
+            ImGui::Combo("Transport", &transport, transportItems, IM_ARRAYSIZE(transportItems));
+            switch (transport) {
+                case 0:
+                m_config.transport = 1;
+                break;
+                case 1:
+                m_config.transport = 4;
+                break;
+            }
 
             ImGui::InputInt("GOP Length", &m_config.gopLength);
 
-            ImGui::InputInt("Performance", &m_config.performance, 0, 3);
+            const char* performanceItems[] = { "Custom (default)", "Highest Quality", "High Quality", "Optimal", "Fast Speed", "Fastest Speed" };
+            ImGui::Combo("Performance", &m_config.performance, performanceItems, IM_ARRAYSIZE(performanceItems));
 
-            ImGui::InputInt("Profile", &m_config.profile, 0, 100);
+            int profile = 0;
+            switch (m_config.profile) {
+                case 66:
+                    profile = 0; break;
+                case 67:
+                    profile = 1;
+                break;
+                case 77:
+                    profile = 2;
+                break;
+                case 100:
+                    profile = 3;
+                break;
+                case 122:
+                    profile = 4;
+                break;
+            }
+            const char* profileItems[] = { "BaseLine", "ConstrBaseLine", "Main", "High", "High422" };
+            ImGui::Combo("Profile", &profile, profileItems, IM_ARRAYSIZE(profileItems));
+            switch (profile) {
+                case 0:
+                m_config.profile = 66;
+                break;
+                case 1:
+                m_config.profile = 67;
+                break;
+                case 2:
+                m_config.profile = 77;
+                break;
+                case 3:
+                m_config.profile = 100;
+                break;
+                case 4:
+                m_config.profile = 122;
+                break;
+            }
+
+            int afdCode = 0;
+
+            switch (m_config.afdCode) {
+                case 2:
+                    afdCode = 1;
+                    break;
+                case 3:
+                    afdCode = 2;
+                    break;
+                case 4:
+                    afdCode = 3;
+                    break;
+                case 8:
+                    afdCode = 4;
+                    break;
+                case 9:
+                    afdCode = 5;
+                    break;
+                case 10:
+                    afdCode = 6;
+                    break;
+                case 11:
+                    afdCode = 7;
+                    break;
+                case 13:
+                    afdCode = 8;
+                    break;
+                case 14:
+                    afdCode = 9;
+                    break;
+                case 15:
+                    afdCode = 10;
+                    break;
+            }
+
+            const char* afdCodeItems[] = { "Auto", "Box 16x9 Top", "Box 14x9 Top", "Box 16x9 Center", "Full Frame", "4x3 Center", "16x9 Center", "14x9 Center", "4x3 SNP 14x9 Center", "16x9 SNP 14x9 Center", "16x9 SNP 4x3 Center" };
+            ImGui::Combo("Afd-code", &afdCode, afdCodeItems, IM_ARRAYSIZE(afdCodeItems));
+
+            switch (afdCode) {
+                case 1:
+                    m_config.afdCode = 2;
+                    break;
+                case 2:
+                    m_config.afdCode = 3;
+                    break;
+                case 3:
+                    m_config.afdCode = 4;
+                    break;
+                case 4:
+                    m_config.afdCode = 8;
+                    break;
+                case 5:
+                    m_config.afdCode = 9;
+                    break;
+                case 6:
+                    m_config.afdCode = 10;
+                    break;
+                case 7:
+                    m_config.afdCode = 11;
+                    break;
+                case 8:
+                    m_config.afdCode = 13;
+                    break;
+                case 9:
+                    m_config.afdCode = 14;
+                    break;
+                case 10:
+                    m_config.afdCode = 15;
+                    break;
+            }
+
+            ImGui::Checkbox("Ar-auto", &m_config.arAuto);
+
+            const char* arModeItems[] = { "PAR", "SAR" };
+            ImGui::Combo("Ar-mode", &m_config.arMode, arModeItems, IM_ARRAYSIZE(arModeItems));
+
+            const char* bFrameModeItems[] = { "All Disposable", "All Reference", "Hierarchical" };
+            ImGui::Combo("B-Frame-Mode", &m_config.bframeMode, bFrameModeItems, IM_ARRAYSIZE(bFrameModeItems));
+
+            const char* chromaFormatItems[] = { "Grayscale encoding", "4:2:0 chroma format", "4:2:2 chroma format" };
+            ImGui::Combo("Chroma-format", &m_config.chromaFormat, chromaFormatItems, IM_ARRAYSIZE(chromaFormatItems));
+
+            const char* fieldOrderItems[] = { "Top Field First", "Bottom Field First", "Auto" };
+            ImGui::Combo("Field-order", &m_config.fieldOrder, fieldOrderItems, IM_ARRAYSIZE(fieldOrderItems));
+
+            ImGui::InputInt("Gop-max-bcount", &m_config.gopMaxBcount, 0, 3);
+
+            ImGui::InputInt("Gop-max-length", &m_config.gopMaxLength, 1, 500);
+
+            ImGui::InputInt("Vbv-size (bits)", &m_config.vbvSize, 1024, 288000000);
+
+            const char* videoFormatItems[] = { "Component", "PAL", "NTSC", "SECAM", "MAC", "UNSPECIFIED" };
+            ImGui::Combo("Video-format", &m_config.videoFormat, videoFormatItems, IM_ARRAYSIZE(videoFormatItems));
+
+            int level = 0;
+
+            switch (m_config.level) {
+                case 1:
+                    level = 0;
+                    break;
+                case 11:
+                    level = 1;
+                    break;
+                case 12:
+                    level = 2;
+                    break;
+                case 2:
+                    level = 3;
+                    break;
+                case 21:
+                    level = 4;
+                    break;
+                case 22:
+                    level = 5;
+                    break;
+                case 3:
+                    level = 6;
+                    break;
+                case 31:
+                    level = 7;
+                    break;
+                case 32:
+                    level = 8;
+                    break;
+                case 4:
+                    level = 9;
+                    break;
+                case 41:
+                    level = 10;
+                    break;
+                case 42:
+                    level = 11;
+                    break;
+                case 5:
+                    level = 12;
+                    break;
+                case 51:
+                    level = 13;
+                    break;
+                case 52:
+                    level = 14;
+                    break;
+                case 6:
+                    level = 15;
+                    break;
+                case 61:
+                    level = 16;
+                    break;
+                case 62:
+                    level = 17;
+                    break;
+                case 100:
+                    level = 18;
+                    break;
+            }
+            const char* levelItems[] = { "1", "1.1", "1.2", "2", "2.1", "2.2", "3", "3.1", "3.2", "4", "4.1", "4.2", "5", "5.1", "5.2", "6", "6.1", "6.2", "auto" };
+            ImGui::Combo("Level", &level, levelItems, IM_ARRAYSIZE(levelItems));
+
+            std::string buffer = "";
+            for (char& character : std::string(levelItems[level])) {
+                if (character == '.') {
+                    continue;
+                }
+
+                buffer += character;
+                if (buffer == "auto") {
+                    buffer = "100";
+                }
+            }
+
+            m_config.level = std::stoi(buffer);
 
             const char* entropyItems[] = { "CAVLC", "CABAC" };
             ImGui::Combo("Entropy Mode", &m_config.entropyMode, entropyItems, IM_ARRAYSIZE(entropyItems));
@@ -419,12 +655,25 @@ void App::run() {
 
             if (ImGui::Button("Run")) {
                 if (!streamRunning.load() && !runner.is_running()) {
+
                     streamRunning = true;
+
+                    //consoleBuffer.clear();
+
                     runThread = std::thread([this]() {
-                        if (runner.start(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.outputIP,
+                        //runner.setStdoutCallback([this](const char* bytes, size_t n) {
+                        //    BufferConsoleOutput(std::string(bytes, n));
+                        //});
+
+                        //runner.setStderrCallback([this](const char* bytes, size_t n) {
+                        //    BufferConsoleOutput(std::string(bytes, n));
+                        //});
+
+                        if (runner.start(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.videoFramerate, m_config.outputIP,
                                          m_config.outputPort, m_config.transport, m_config.gopLength, m_config.performance,
                                          m_config.profile, m_config.entropyMode, m_config.pictureMode, m_config.bitrateMode,
-                                         m_config.multicast)) {
+                                         m_config.multicast, m_config.afdCode, m_config.arAuto, m_config.bframeMode, m_config.chromaFormat, m_config.fieldOrder,
+                                        m_config.gopMaxBcount, m_config.gopMaxLength, m_config.vbvSize, m_config.videoFormat, m_config.level)) {
                             runner.wait();
                         }
                         streamRunning = false;
@@ -437,7 +686,32 @@ void App::run() {
             if (ImGui::Button("Stop")) {
                 runner.stop();
                 streamRunning = false;
+                runThread.detach();
             }
+
+            ImGui::SameLine();
+            ImGui::Text("Status:");
+            ImGui::SameLine();
+            if (streamRunning) {
+                ImGui::Text("Running");
+            }
+            else {
+                ImGui::Text("Off");
+            }
+
+            //ImGui::Separator();
+            //ImGui::Text("Dialogue Box");
+
+            //ImGui::BeginChild("Console", ImVec2(0, 0), true);
+            //{
+            //    if (streamRunning.load()) {
+            //        for (const auto& line : consoleBuffer) {
+            //            ImGui::TextUnformatted(line.c_str());
+            //            consoleBuffer.pop_front();
+            //        }
+            //    }
+            //}
+            //ImGui::EndChild();
 
             ImGui::End();
         }

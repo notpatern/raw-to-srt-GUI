@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <functional>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -29,24 +30,35 @@ namespace RawToSrt {
 
 class Runner {
 public:
+    using OutputCallback = std::function<void(const char*, size_t)>;
+
     std::unique_ptr<TinyProcessLib::Process> process;
     std::atomic<int> exit_status{-1};
 
     Runner() = default;
     ~Runner() { stop(); }
 
-    bool start(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
-               int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast);
+    bool start(std::string audioDevice, std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
+               int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast, int afdCode, int arAuto, int bFramesMode, int chromaFormat, int fieldOrder,
+               int gopMaxBcount, int gopMaxLength, int vbvSize, int videoFormat, int level);
 
     void stop();
 
     bool is_running() const { return process && exit_status.load() == -1; }
 
     int wait();
+
+    void setStdoutCallback(OutputCallback callback) {stdoutCallback = callback;}
+    void setStderrCallback(OutputCallback callback) {stderrCallback = callback;}
+
+private:
+    OutputCallback stdoutCallback;
+    OutputCallback stderrCallback;
 };
 
-inline bool Runner::start(std::string audioDevice, std::string videoDevice, int videoBitrate, std::string outputIP, int outputPort, int transport,
-                          int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast) {
+inline bool Runner::start(std::string audioDevice, std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
+                          int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast, int afdCode, int arAuto,
+                          int bFramesMode, int chromaFormat, int fieldOrder, int gopMaxBcount, int gopMaxLength, int vbvSize, int videoFormat, int level) {
 
     stop();
 
@@ -91,6 +103,17 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
         "bitrate-mode=" + std::to_string(bitrateMode) + " "
         "bitrate-avg=" + std::to_string(videoBitrate) + " "
         "gop-max-length=" + std::to_string(gopLength) + " "
+        "fps=" + std::to_string(videoFramerate) + " "
+        "afd-code=" + std::to_string(afdCode) + " "
+        "ar-auto=" + std::to_string(arAuto) + " "
+        "b-frames-mode=" + std::to_string(bFramesMode) + " "
+        "chroma-format=" + std::to_string(chromaFormat) + " "
+        "field-order=" + std::to_string(fieldOrder) + " "
+        "gop-max-bcount=" + std::to_string(gopMaxBcount) + " "
+        "gop-max-length=" + std::to_string(gopMaxLength) + " "
+        "vbv-size=" + std::to_string(vbvSize) + " "
+        "video-format=" + std::to_string(videoFormat) + " "
+        "level=" + std::to_string(level) + " "
         "performance=" + std::to_string(performance) + " ! "
         "empegmux name=mux ! "
         + sinkConfig + " "
@@ -117,6 +140,17 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
         "bitrate-mode=" + std::to_string(bitrateMode) + " "
         "bitrate-avg=" + std::to_string(videoBitrate) + " "
         "gop-max-length=" + std::to_string(gopLength) + " "
+        "fps=" + std::to_string(videoFramerate) + " "
+        "afd-code=" + std::to_string(afdCode) + " "
+        "ar-auto=" + std::to_string(arAuto) + " "
+        "b-frames-mode=" + std::to_string(bFramesMode) + " "
+        "chroma-format=" + std::to_string(chromaFormat) + " "
+        "field-order=" + std::to_string(fieldOrder) + " "
+        "gop-max-bcount=" + std::to_string(gopMaxBcount) + " "
+        "gop-max-length=" + std::to_string(gopMaxLength) + " "
+        "vbv-size=" + std::to_string(vbvSize) + " "
+        "video-format=" + std::to_string(videoFormat) + " "
+        "level=" + std::to_string(level) + " "
         "performance=" + std::to_string(performance) + " ! "
         "empegmux name=mux ! "
         + sinkConfig + " "
@@ -145,6 +179,7 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
     std::cout << "Video Device: " << videoDevice << "\n";
     std::cout << "Audio Device: " << audioDevice << "\n";
     std::cout << "Video Bitrate: " << videoBitrate << " bps\n";
+    std::cout << "Video Framerate: " << videoFramerate << "\n";
     std::cout << "Transport: " << (transport == 4 ? "SRT" : "UDP") << "\n";
     std::cout << "Output: " << outputIP << ":" << outputPort << "\n";
     std::cout << "GOP Length: " << gopLength << " seconds\n";
@@ -153,13 +188,17 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
     std::cout << "\n=== Running Pipeline ===\n";
     std::cout << command << "\n\n";
 
-#ifdef _WIN32
-    process = std::make_unique<TinyProcessLib::Process>(command, "", nullptr, nullptr);
-#else
-    process = std::make_unique<TinyProcessLib::Process>("/bin/sh",
-        std::vector<std::string>{"sh", "-c", command},
-        "", nullptr, nullptr);
-#endif
+    process = std::make_unique<TinyProcessLib::Process>(command, "",
+                                                        [this](const char* bytes, size_t n) {
+                                                        if (stdoutCallback) {
+                                                        stdoutCallback(bytes, n);
+                                                        }
+                                                        },
+                                                        [this](const char* bytes, size_t n) {
+                                                        if (stderrCallback) {
+                                                        stderrCallback(bytes, n);
+                                                        }
+                                                        });
 
     exit_status = -1;
     return true;
@@ -167,17 +206,18 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
 
 inline void Runner::stop() {
     if (process) {
-        process->kill();
-        process->close_stdin();
-        wait();
+        process->kill(true);
+        process.reset();
+        exit_status = 0;
+        std::cout << "remember me, for I gave sweat and blood until freedom came.\n\r";
     }
 }
 
 inline int Runner::wait() {
     if (process) {
         exit_status = process->get_exit_status();
-        process.reset();
     }
     return exit_status.load();
 }
 }
+

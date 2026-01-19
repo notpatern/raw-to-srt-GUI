@@ -6,7 +6,10 @@
 #include "../../vendors/imgui/imgui_impl_vulkan.h"
 #include "imgui.h"
 #include <atomic>
+#include <string_view>
 #include <thread>
+#include <mutex>
+#include <deque>
 
 class App {
 private:
@@ -19,6 +22,11 @@ private:
     std::atomic_bool streamRunning{false};
     RawToSrt::Runner runner;
 
+    std::deque<std::string> consoleBuffer;
+    std::mutex consoleMutex; //cuz we gon deque from multiple threads so we only want one thread to access the data at a time
+    const size_t MAX_CONSOLE_LINES = 1000;
+
+    void BufferConsoleOutput(const std::string& line);
     void Init();
 
 public:

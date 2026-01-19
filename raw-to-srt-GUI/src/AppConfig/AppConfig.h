@@ -11,6 +11,7 @@ struct Config {
     std::string audioDevice;
     std::string videoDevice;
     int videoBitrate;
+    int videoFramerate;
     std::string outputIP;
     int outputPort;
     int transport;
@@ -21,6 +22,17 @@ struct Config {
     int pictureMode;
     int bitrateMode;
     bool multicast;
+    bool arAuto;
+    int arMode;
+    int bframeMode;
+    int fieldOrder;
+    int gopMaxBcount;
+    int gopMaxLength;
+    int vbvSize;
+    int videoFormat;
+    int afdCode;
+    int level;
+    int chromaFormat;
 };
 
 inline bool LoadConfig(std::string_view fileName, Config& config) {
@@ -37,16 +49,28 @@ inline bool LoadConfig(std::string_view fileName, Config& config) {
     config.audioDevice = data.value("audio_device", "OBS_Audio");
     config.videoDevice = data.value("video_device", "/dev/video0");
     config.videoBitrate = data.value("video_bitrate", 8000000);
+    config.videoFramerate = data.value("video_framerate", 25);
     config.outputIP = data.value("output_ip", std::string("127.0.0.1"));
     config.outputPort = data.value("output_port", 9000);
     config.transport = data.value("transport", 4);
     config.gopLength = data.value("gop_length", 2);
-    config.performance = data.value("performance", 3);
-    config.profile = data.value("profile", 77);
+    config.performance = data.value("performance", 0);
+    config.profile = data.value("profile", 100);
     config.entropyMode = data.value("entropy_mode", 1);
     config.pictureMode = data.value("picture_mode", 1);
     config.bitrateMode = data.value("bitrate_mode", 2);
     config.multicast = data.value("multicast", false);
+    config.arAuto = data.value("ar_auto", true);
+    config.arMode = data.value("ar_mode", 1);
+    config.bframeMode = data.value("b_frame_mode", 0);
+    config.fieldOrder = data.value("field_order", 2);
+    config.gopMaxBcount = data.value("gop_max_b_count", 0);
+    config.gopMaxLength = data.value("gop_max_length", 250);
+    config.vbvSize = data.value("vbv_size", 1200000);
+    config.videoFormat = data.value("video_format", 5);
+    config.afdCode = data.value("afd_code", 0);
+    config.level = data.value("level", 100);
+    config.chromaFormat = data.value("chromaFormat", 1);
     return true;
 }
 
@@ -55,6 +79,7 @@ inline void SaveConfig(std::string_view fileName, Config& config) {
         {"audio_device", config.audioDevice},
         {"video_device", config.videoDevice},
         {"video_bitrate", config.videoBitrate},
+        {"video_framerate", config.videoFramerate},
         {"output_ip", config.outputIP},
         {"output_port", config.outputPort},
         {"transport", config.transport},
@@ -64,14 +89,26 @@ inline void SaveConfig(std::string_view fileName, Config& config) {
         {"entropy_mode", config.entropyMode},
         {"picture_mode", config.pictureMode},
         {"bitrate_mode", config.bitrateMode},
-        {"multicast", config.multicast}
+        {"multicast", config.multicast},
+        {"ar_auto", config.arAuto},
+        {"ar_mode", config.arMode},
+        {"b_frame_mode", config.bframeMode},
+        {"field_order", config.fieldOrder},
+        {"gop_max_b_count", config.gopMaxBcount},
+        {"gop_max_length", config.gopMaxLength},
+        {"vbv_size", config.vbvSize},
+        {"video_format", config.videoFormat},
+        {"afd_code", config.afdCode},
+        {"level", config.level},
+        {"chroma_format", config.chromaFormat}
     };
+
     std::ofstream dataFile(fileName.data());
     if (!dataFile.is_open()) {
         std::cerr << "config could not be saved, file did not open\n\r";
         return;
     }
-    dataFile << json.dump(4);  // Added: pretty print with 4 spaces
+    dataFile << json.dump(4);
     return;
 }
 

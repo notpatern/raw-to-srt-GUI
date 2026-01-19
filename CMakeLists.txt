@@ -15,12 +15,17 @@ file(GLOB_RECURSE IMGUI_SOURCES
     "${IMGUI_DIR}/*.cpp"
 )
 
+set(TINYPROCESS_DIR "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/TinyProcessLib")
+file(GLOB_RECURSE TINYPROCESS_SOURCES
+	"${TINYPROCESS_DIR}/*.cpp"
+)
+
 file(GLOB_RECURSE SRC_FILES
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/*.cpp"
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/src/*.h"
 )
 
-add_executable(${PROJECT_NAME} ${SRC_FILES} ${IMGUI_SOURCES})
+add_executable(${PROJECT_NAME} ${SRC_FILES} ${IMGUI_SOURCES} ${TINYPROCESS_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/imgui"

@@ -1,50 +1,62 @@
 [
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/App/App.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/App/App.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/src/main.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/src/main.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_draw.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_glfw.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_impl_vulkan.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_tables.cpp.o"
 },
 {
   "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
-  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
   "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp",
   "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/imgui/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/TinyProcessLib/process.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib/process.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib/process.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/TinyProcessLib/process.cpp.o"
+},
+{
+  "directory": "/home/btadmin/gst/raw-to-srt-GUI/build",
+  "command": "/usr/bin/c++  -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/imgui -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/GLFW -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/raw-to-srt -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/nlohmann -I/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib -std=gnu++23 -o CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/TinyProcessLib/process_unix.cpp.o -c /home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib/process_unix.cpp",
+  "file": "/home/btadmin/gst/raw-to-srt-GUI/raw-to-srt-GUI/vendors/TinyProcessLib/process_unix.cpp",
+  "output": "CMakeFiles/raw-to-srt-GUI.dir/raw-to-srt-GUI/vendors/TinyProcessLib/process_unix.cpp.o"
 }
 ]
