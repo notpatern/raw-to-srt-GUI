@@ -60,7 +60,3 @@ The GUI exposes all configuration options available in `config.json`. Changes ar
 | Field Order | `Top Field First`, `Bottom Field First`, `Auto` | Field order for interlaced content |
 | Video Format | `Component`, `PAL`, `NTSC`, `SECAM`, `MAC`, `Unspecified` | Video format standard |
 | Multicast | boolean | Enable multicast (UDP only) |
-
-# License
-
-MIT
