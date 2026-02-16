@@ -7,6 +7,7 @@
 #include <fstream>
 #include <memory>
 #include <atomic>
+#include <vector>
 #include "../nlohmann/json.hpp"
 #include "../TinyProcessLib/process.hpp"
 
@@ -38,9 +39,12 @@ public:
     Runner() = default;
     ~Runner() { stop(); }
 
-    bool start(std::string audioDevice, std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
-               int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast, int afdCode, int arAuto, int bFramesMode, int chromaFormat, int fieldOrder,
-               int gopMaxBcount, int gopMaxLength, int vbvSize, int videoFormat, int level);
+    bool start(std::string audioDevice1, std::string audioDevice2, std::string audioDevice3, std::string audioDevice4,
+               std::string audioDevice5, std::string audioDevice6, std::string audioDevice7, std::string audioDevice8,
+               std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
+               int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast, 
+               int afdCode, int arAuto, int bFramesMode, int chromaFormat, int fieldOrder, int gopMaxBcount, int gopMaxLength, 
+               int vbvSize, int videoFormat, int level);
 
     void stop();
 
@@ -56,11 +60,34 @@ private:
     OutputCallback stderrCallback;
 };
 
-inline bool Runner::start(std::string audioDevice, std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
-                          int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast, int afdCode, int arAuto,
-                          int bFramesMode, int chromaFormat, int fieldOrder, int gopMaxBcount, int gopMaxLength, int vbvSize, int videoFormat, int level) {
+inline bool Runner::start(std::string audioDevice1, std::string audioDevice2, std::string audioDevice3, std::string audioDevice4,
+                          std::string audioDevice5, std::string audioDevice6, std::string audioDevice7, std::string audioDevice8,
+                          std::string videoDevice, int videoBitrate, int videoFramerate, std::string outputIP, int outputPort, int transport,
+                          int gopLength, int performance, int profile, int entropyMode, int pictureMode, int bitrateMode, bool multicast,
+                          int afdCode, int arAuto, int bFramesMode, int chromaFormat, int fieldOrder, int gopMaxBcount, int gopMaxLength,
+                          int vbvSize, int videoFormat, int level) {
 
     stop();
+
+    std::vector<std::string> audioDevices;
+    if (!audioDevice1.empty()) audioDevices.push_back(audioDevice1);
+    if (!audioDevice2.empty()) audioDevices.push_back(audioDevice2);
+    if (!audioDevice3.empty()) audioDevices.push_back(audioDevice3);
+    if (!audioDevice4.empty()) audioDevices.push_back(audioDevice4);
+    if (!audioDevice5.empty()) audioDevices.push_back(audioDevice5);
+    if (!audioDevice6.empty()) audioDevices.push_back(audioDevice6);
+    if (!audioDevice7.empty()) audioDevices.push_back(audioDevice7);
+    if (!audioDevice8.empty()) audioDevices.push_back(audioDevice8);
+
+    if (audioDevices.empty()) {
+        std::cerr << "At least one audio device must be specified\n";
+        return false;
+    }
+
+    if (audioDevices.size() > 8) {
+        std::cerr << "Maximum 8 audio devices supported\n";
+        return false;
+    }
 
     std::ifstream cfgFile("config.json");
     if (!cfgFile.is_open()) {
@@ -92,10 +119,9 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
         return false;
     }
 
-#ifdef _WIN32
-    std::string command =
-        "gst-launch-1.0 "
-        + std::string(VIDEO_SOURCE) + " " + VIDEO_DEVICE_PARAM + videoDevice + " ! "
+    std::string command = "gst-launch-1.0 ";
+    
+    command += std::string(VIDEO_SOURCE) + " " + VIDEO_DEVICE_PARAM + videoDevice + " ! "
         "videoconvert ! "
         "eavcenc profile=" + std::to_string(profile) + " "
         "entropy-mode=" + std::to_string(entropyMode) + " "
@@ -115,58 +141,25 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
         "video-format=" + std::to_string(videoFormat) + " "
         "level=" + std::to_string(level) + " "
         "performance=" + std::to_string(performance) + " ! "
-        "empegmux name=mux ! "
-        + sinkConfig + " "
-        + std::string(AUDIO_SOURCE) + " " + AUDIO_DEVICE_PARAM;
+        "empegmux name=mux ! " + sinkConfig + " ";
 
-    if (audioDevice.find(' ') != std::string::npos) {
-        command += "\"" + audioDevice + "\"";
-    } else {
-        command += audioDevice;
+    for (size_t i = 0; i < audioDevices.size(); ++i) {
+        const std::string& audioDevice = audioDevices[i];
+        
+        command += std::string(AUDIO_SOURCE) + " " + AUDIO_DEVICE_PARAM;
+        
+        if (audioDevice.find(' ') != std::string::npos || audioDevice.find('"') != std::string::npos) {
+            command += "\"" + audioDevice + "\"";
+        } else {
+            command += audioDevice;
+        }
+        
+        command += " ! "
+            "audioconvert ! audioresample ! "
+            "audio/x-raw,channels=1 ! "  // Force mono
+            "eaacenc bitrate=128000 ! "
+            "mux. ";
     }
-
-    command += " ! "
-        "audioconvert ! audioresample ! "
-        "eaacenc bitrate=128000 ! "
-        "mux.";
-#else
-    std::string command =
-        "gst-launch-1.0 "
-        + std::string(VIDEO_SOURCE) + " " + VIDEO_DEVICE_PARAM + videoDevice + " ! "
-        "videoconvert ! "
-        "eavcenc profile=" + std::to_string(profile) + " "
-        "entropy-mode=" + std::to_string(entropyMode) + " "
-        "picture-mode=" + std::to_string(pictureMode) + " "
-        "bitrate-mode=" + std::to_string(bitrateMode) + " "
-        "bitrate-avg=" + std::to_string(videoBitrate) + " "
-        "gop-max-length=" + std::to_string(gopLength) + " "
-        "fps=" + std::to_string(videoFramerate) + " "
-        "afd-code=" + std::to_string(afdCode) + " "
-        "ar-auto=" + std::to_string(arAuto) + " "
-        "b-frames-mode=" + std::to_string(bFramesMode) + " "
-        "chroma-format=" + std::to_string(chromaFormat) + " "
-        "field-order=" + std::to_string(fieldOrder) + " "
-        "gop-max-bcount=" + std::to_string(gopMaxBcount) + " "
-        "gop-max-length=" + std::to_string(gopMaxLength) + " "
-        "vbv-size=" + std::to_string(vbvSize) + " "
-        "video-format=" + std::to_string(videoFormat) + " "
-        "level=" + std::to_string(level) + " "
-        "performance=" + std::to_string(performance) + " ! "
-        "empegmux name=mux ! "
-        + sinkConfig + " "
-        + std::string(AUDIO_SOURCE) + " " + AUDIO_DEVICE_PARAM;
-
-    if (audioDevice.find(' ') != std::string::npos || audioDevice.find('"') != std::string::npos) {
-        command += "\"" + audioDevice + "\"";
-    } else {
-        command += audioDevice;
-    }
-
-    command += " ! "
-        "audioconvert ! audioresample ! "
-        "eaacenc bitrate=128000 ! "
-        "mux.";
-#endif
 
     std::cout << "=== Stream Configuration ===\n";
 #ifdef _WIN32
@@ -177,7 +170,10 @@ inline bool Runner::start(std::string audioDevice, std::string videoDevice, int 
     std::cout << "Video Source: " << VIDEO_SOURCE << "\n";
     std::cout << "Audio Source: " << AUDIO_SOURCE << "\n";
     std::cout << "Video Device: " << videoDevice << "\n";
-    std::cout << "Audio Device: " << audioDevice << "\n";
+    std::cout << "Audio Devices (" << audioDevices.size() << "):\n";
+    for (size_t i = 0; i < audioDevices.size(); ++i) {
+        std::cout << "  [" << (i + 1) << "] " << audioDevices[i] << "\n";
+    }
     std::cout << "Video Bitrate: " << videoBitrate << " bps\n";
     std::cout << "Video Framerate: " << videoFramerate << "\n";
     std::cout << "Transport: " << (transport == 4 ? "SRT" : "UDP") << "\n";
@@ -220,4 +216,3 @@ inline int Runner::wait() {
     return exit_status.load();
 }
 }
-
