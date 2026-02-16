@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+﻿cmake_minimum_required(VERSION 3.10)
 
 project(raw-to-srt-GUI VERSION 0.0)
 
@@ -17,7 +17,7 @@ file(GLOB_RECURSE IMGUI_SOURCES
 
 set(TINYPROCESS_DIR "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/vendors/TinyProcessLib")
 file(GLOB_RECURSE TINYPROCESS_SOURCES
-	"${TINYPROCESS_DIR}/*.cpp"
+    "${TINYPROCESS_DIR}/*.cpp"
 )
 
 file(GLOB_RECURSE SRC_FILES
@@ -36,4 +36,3 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan glfw)
-
