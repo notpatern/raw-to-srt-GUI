@@ -373,15 +373,66 @@ void App::run() {
                          ImGuiWindowFlags_NoResize |
                          ImGuiWindowFlags_NoMove |
                          ImGuiWindowFlags_NoCollapse
-                         );
+            );
 
-            static char audioDeviceBuffer[256] = "";
-            if (audioDeviceBuffer[0] == '\0' && !m_config.audioDevice.empty()) {
-                std::strncpy(audioDeviceBuffer, m_config.audioDevice.c_str(), sizeof(audioDeviceBuffer) - 1);
+            // Audio devices 1–8
+            static char audioDeviceBuffer1[256] = "";
+            if (audioDeviceBuffer1[0] == '\0' && !m_config.audioDevice1.empty()) {
+                std::strncpy(audioDeviceBuffer1, m_config.audioDevice1.c_str(), sizeof(audioDeviceBuffer1) - 1);
             }
-            ImGui::InputText("Audio Device", audioDeviceBuffer, sizeof(audioDeviceBuffer));
-            m_config.audioDevice = audioDeviceBuffer;
+            ImGui::InputText("Audio Device 1", audioDeviceBuffer1, sizeof(audioDeviceBuffer1));
+            m_config.audioDevice1 = audioDeviceBuffer1;
 
+            static char audioDeviceBuffer2[256] = "";
+            if (audioDeviceBuffer2[0] == '\0' && !m_config.audioDevice2.empty()) {
+                std::strncpy(audioDeviceBuffer2, m_config.audioDevice2.c_str(), sizeof(audioDeviceBuffer2) - 1);
+            }
+            ImGui::InputText("Audio Device 2", audioDeviceBuffer2, sizeof(audioDeviceBuffer2));
+            m_config.audioDevice2 = audioDeviceBuffer2;
+
+            static char audioDeviceBuffer3[256] = "";
+            if (audioDeviceBuffer3[0] == '\0' && !m_config.audioDevice3.empty()) {
+                std::strncpy(audioDeviceBuffer3, m_config.audioDevice3.c_str(), sizeof(audioDeviceBuffer3) - 1);
+            }
+            ImGui::InputText("Audio Device 3", audioDeviceBuffer3, sizeof(audioDeviceBuffer3));
+            m_config.audioDevice3 = audioDeviceBuffer3;
+
+            static char audioDeviceBuffer4[256] = "";
+            if (audioDeviceBuffer4[0] == '\0' && !m_config.audioDevice4.empty()) {
+                std::strncpy(audioDeviceBuffer4, m_config.audioDevice4.c_str(), sizeof(audioDeviceBuffer4) - 1);
+            }
+            ImGui::InputText("Audio Device 4", audioDeviceBuffer4, sizeof(audioDeviceBuffer4));
+            m_config.audioDevice4 = audioDeviceBuffer4;
+
+            static char audioDeviceBuffer5[256] = "";
+            if (audioDeviceBuffer5[0] == '\0' && !m_config.audioDevice5.empty()) {
+                std::strncpy(audioDeviceBuffer5, m_config.audioDevice5.c_str(), sizeof(audioDeviceBuffer5) - 1);
+            }
+            ImGui::InputText("Audio Device 5", audioDeviceBuffer5, sizeof(audioDeviceBuffer5));
+            m_config.audioDevice5 = audioDeviceBuffer5;
+
+            static char audioDeviceBuffer6[256] = "";
+            if (audioDeviceBuffer6[0] == '\0' && !m_config.audioDevice6.empty()) {
+                std::strncpy(audioDeviceBuffer6, m_config.audioDevice6.c_str(), sizeof(audioDeviceBuffer6) - 1);
+            }
+            ImGui::InputText("Audio Device 6", audioDeviceBuffer6, sizeof(audioDeviceBuffer6));
+            m_config.audioDevice6 = audioDeviceBuffer6;
+
+            static char audioDeviceBuffer7[256] = "";
+            if (audioDeviceBuffer7[0] == '\0' && !m_config.audioDevice7.empty()) {
+                std::strncpy(audioDeviceBuffer7, m_config.audioDevice7.c_str(), sizeof(audioDeviceBuffer7) - 1);
+            }
+            ImGui::InputText("Audio Device 7", audioDeviceBuffer7, sizeof(audioDeviceBuffer7));
+            m_config.audioDevice7 = audioDeviceBuffer7;
+
+            static char audioDeviceBuffer8[256] = "";
+            if (audioDeviceBuffer8[0] == '\0' && !m_config.audioDevice8.empty()) {
+                std::strncpy(audioDeviceBuffer8, m_config.audioDevice8.c_str(), sizeof(audioDeviceBuffer8) - 1);
+            }
+            ImGui::InputText("Audio Device 8", audioDeviceBuffer8, sizeof(audioDeviceBuffer8));
+            m_config.audioDevice8 = audioDeviceBuffer8;
+
+            // Video device
             static char videoDeviceBuffer[256] = "";
             if (videoDeviceBuffer[0] == '\0' && !m_config.videoDevice.empty()) {
                 std::strncpy(videoDeviceBuffer, m_config.videoDevice.c_str(), sizeof(videoDeviceBuffer) - 1);
@@ -390,7 +441,6 @@ void App::run() {
             m_config.videoDevice = videoDeviceBuffer;
 
             ImGui::InputInt("Video Bitrate (kbps)", &m_config.videoBitrate);
-
             ImGui::InputInt("Video Framerate", &m_config.videoFramerate);
 
             static char outputIPBuffer[64] = "";
@@ -406,20 +456,20 @@ void App::run() {
             switch (m_config.transport) {
                 case 1:
                     transport = 0;
-                break;
+                    break;
                 case 4:
                     transport = 1;
-                break;
+                    break;
             }
             const char* transportItems[] = { "UDP", "SRT" };
             ImGui::Combo("Transport", &transport, transportItems, IM_ARRAYSIZE(transportItems));
             switch (transport) {
                 case 0:
-                m_config.transport = 1;
-                break;
+                    m_config.transport = 1;
+                    break;
                 case 1:
-                m_config.transport = 4;
-                break;
+                    m_config.transport = 4;
+                    break;
             }
 
             ImGui::InputInt("GOP Length", &m_config.gopLength);
@@ -432,107 +482,56 @@ void App::run() {
                 case 66:
                     profile = 0; break;
                 case 67:
-                    profile = 1;
-                break;
+                    profile = 1; break;
                 case 77:
-                    profile = 2;
-                break;
+                    profile = 2; break;
                 case 100:
-                    profile = 3;
-                break;
+                    profile = 3; break;
                 case 122:
-                    profile = 4;
-                break;
+                    profile = 4; break;
             }
             const char* profileItems[] = { "BaseLine", "ConstrBaseLine", "Main", "High", "High422" };
             ImGui::Combo("Profile", &profile, profileItems, IM_ARRAYSIZE(profileItems));
             switch (profile) {
-                case 0:
-                m_config.profile = 66;
-                break;
-                case 1:
-                m_config.profile = 67;
-                break;
-                case 2:
-                m_config.profile = 77;
-                break;
-                case 3:
-                m_config.profile = 100;
-                break;
-                case 4:
-                m_config.profile = 122;
-                break;
+                case 0: m_config.profile = 66;  break;
+                case 1: m_config.profile = 67;  break;
+                case 2: m_config.profile = 77;  break;
+                case 3: m_config.profile = 100; break;
+                case 4: m_config.profile = 122; break;
             }
 
             int afdCode = 0;
-
             switch (m_config.afdCode) {
-                case 2:
-                    afdCode = 1;
-                    break;
-                case 3:
-                    afdCode = 2;
-                    break;
-                case 4:
-                    afdCode = 3;
-                    break;
-                case 8:
-                    afdCode = 4;
-                    break;
-                case 9:
-                    afdCode = 5;
-                    break;
-                case 10:
-                    afdCode = 6;
-                    break;
-                case 11:
-                    afdCode = 7;
-                    break;
-                case 13:
-                    afdCode = 8;
-                    break;
-                case 14:
-                    afdCode = 9;
-                    break;
-                case 15:
-                    afdCode = 10;
-                    break;
+                case 2:  afdCode = 1;  break;
+                case 3:  afdCode = 2;  break;
+                case 4:  afdCode = 3;  break;
+                case 8:  afdCode = 4;  break;
+                case 9:  afdCode = 5;  break;
+                case 10: afdCode = 6;  break;
+                case 11: afdCode = 7;  break;
+                case 13: afdCode = 8;  break;
+                case 14: afdCode = 9;  break;
+                case 15: afdCode = 10; break;
             }
 
-            const char* afdCodeItems[] = { "Auto", "Box 16x9 Top", "Box 14x9 Top", "Box 16x9 Center", "Full Frame", "4x3 Center", "16x9 Center", "14x9 Center", "4x3 SNP 14x9 Center", "16x9 SNP 14x9 Center", "16x9 SNP 4x3 Center" };
+            const char* afdCodeItems[] = {
+                "Auto", "Box 16x9 Top", "Box 14x9 Top", "Box 16x9 Center",
+                "Full Frame", "4x3 Center", "16x9 Center", "14x9 Center",
+                "4x3 SNP 14x9 Center", "16x9 SNP 14x9 Center", "16x9 SNP 4x3 Center"
+            };
             ImGui::Combo("Afd-code", &afdCode, afdCodeItems, IM_ARRAYSIZE(afdCodeItems));
 
             switch (afdCode) {
-                case 1:
-                    m_config.afdCode = 2;
-                    break;
-                case 2:
-                    m_config.afdCode = 3;
-                    break;
-                case 3:
-                    m_config.afdCode = 4;
-                    break;
-                case 4:
-                    m_config.afdCode = 8;
-                    break;
-                case 5:
-                    m_config.afdCode = 9;
-                    break;
-                case 6:
-                    m_config.afdCode = 10;
-                    break;
-                case 7:
-                    m_config.afdCode = 11;
-                    break;
-                case 8:
-                    m_config.afdCode = 13;
-                    break;
-                case 9:
-                    m_config.afdCode = 14;
-                    break;
-                case 10:
-                    m_config.afdCode = 15;
-                    break;
+                case 1:  m_config.afdCode = 2;  break;
+                case 2:  m_config.afdCode = 3;  break;
+                case 3:  m_config.afdCode = 4;  break;
+                case 4:  m_config.afdCode = 8;  break;
+                case 5:  m_config.afdCode = 9;  break;
+                case 6:  m_config.afdCode = 10; break;
+                case 7:  m_config.afdCode = 11; break;
+                case 8:  m_config.afdCode = 13; break;
+                case 9:  m_config.afdCode = 14; break;
+                case 10: m_config.afdCode = 15; break;
             }
 
             ImGui::Checkbox("Ar-auto", &m_config.arAuto);
@@ -550,74 +549,33 @@ void App::run() {
             ImGui::Combo("Field-order", &m_config.fieldOrder, fieldOrderItems, IM_ARRAYSIZE(fieldOrderItems));
 
             ImGui::InputInt("Gop-max-bcount", &m_config.gopMaxBcount, 0, 3);
-
             ImGui::InputInt("Gop-max-length", &m_config.gopMaxLength, 1, 500);
-
             ImGui::InputInt("Vbv-size (bits)", &m_config.vbvSize, 1024, 288000000);
 
             const char* videoFormatItems[] = { "Component", "PAL", "NTSC", "SECAM", "MAC", "UNSPECIFIED" };
             ImGui::Combo("Video-format", &m_config.videoFormat, videoFormatItems, IM_ARRAYSIZE(videoFormatItems));
 
             int level = 0;
-
             switch (m_config.level) {
-                case 1:
-                    level = 0;
-                    break;
-                case 11:
-                    level = 1;
-                    break;
-                case 12:
-                    level = 2;
-                    break;
-                case 2:
-                    level = 3;
-                    break;
-                case 21:
-                    level = 4;
-                    break;
-                case 22:
-                    level = 5;
-                    break;
-                case 3:
-                    level = 6;
-                    break;
-                case 31:
-                    level = 7;
-                    break;
-                case 32:
-                    level = 8;
-                    break;
-                case 4:
-                    level = 9;
-                    break;
-                case 41:
-                    level = 10;
-                    break;
-                case 42:
-                    level = 11;
-                    break;
-                case 5:
-                    level = 12;
-                    break;
-                case 51:
-                    level = 13;
-                    break;
-                case 52:
-                    level = 14;
-                    break;
-                case 6:
-                    level = 15;
-                    break;
-                case 61:
-                    level = 16;
-                    break;
-                case 62:
-                    level = 17;
-                    break;
-                case 100:
-                    level = 18;
-                    break;
+                case 1:   level = 0;  break;
+                case 11:  level = 1;  break;
+                case 12:  level = 2;  break;
+                case 2:   level = 3;  break;
+                case 21:  level = 4;  break;
+                case 22:  level = 5;  break;
+                case 3:   level = 6;  break;
+                case 31:  level = 7;  break;
+                case 32:  level = 8;  break;
+                case 4:   level = 9;  break;
+                case 41:  level = 10; break;
+                case 42:  level = 11; break;
+                case 5:   level = 12; break;
+                case 51:  level = 13; break;
+                case 52:  level = 14; break;
+                case 6:   level = 15; break;
+                case 61:  level = 16; break;
+                case 62:  level = 17; break;
+                case 100: level = 18; break;
             }
             const char* levelItems[] = { "1", "1.1", "1.2", "2", "2.1", "2.2", "3", "3.1", "3.2", "4", "4.1", "4.2", "5", "5.1", "5.2", "6", "6.1", "6.2", "auto" };
             ImGui::Combo("Level", &level, levelItems, IM_ARRAYSIZE(levelItems));
@@ -627,13 +585,11 @@ void App::run() {
                 if (character == '.') {
                     continue;
                 }
-
                 buffer += character;
                 if (buffer == "auto") {
                     buffer = "100";
                 }
             }
-
             m_config.level = std::stoi(buffer);
 
             const char* entropyItems[] = { "CAVLC", "CABAC" };
@@ -658,22 +614,41 @@ void App::run() {
 
                     streamRunning = true;
 
-                    //consoleBuffer.clear();
-
                     runThread = std::thread([this]() {
-                        //runner.setStdoutCallback([this](const char* bytes, size_t n) {
-                        //    BufferConsoleOutput(std::string(bytes, n));
-                        //});
+                        // If you want console output back, re-enable the callbacks here.
 
-                        //runner.setStderrCallback([this](const char* bytes, size_t n) {
-                        //    BufferConsoleOutput(std::string(bytes, n));
-                        //});
-
-                        if (runner.start(m_config.audioDevice, m_config.videoDevice, m_config.videoBitrate, m_config.videoFramerate, m_config.outputIP,
-                                         m_config.outputPort, m_config.transport, m_config.gopLength, m_config.performance,
-                                         m_config.profile, m_config.entropyMode, m_config.pictureMode, m_config.bitrateMode,
-                                         m_config.multicast, m_config.afdCode, m_config.arAuto, m_config.bframeMode, m_config.chromaFormat, m_config.fieldOrder,
-                                        m_config.gopMaxBcount, m_config.gopMaxLength, m_config.vbvSize, m_config.videoFormat, m_config.level)) {
+                        if (runner.start(
+                                m_config.audioDevice1,
+                                m_config.audioDevice2,
+                                m_config.audioDevice3,
+                                m_config.audioDevice4,
+                                m_config.audioDevice5,
+                                m_config.audioDevice6,
+                                m_config.audioDevice7,
+                                m_config.audioDevice8,
+                                m_config.videoDevice,
+                                m_config.videoBitrate,
+                                m_config.videoFramerate,
+                                m_config.outputIP,
+                                m_config.outputPort,
+                                m_config.transport,
+                                m_config.gopLength,
+                                m_config.performance,
+                                m_config.profile,
+                                m_config.entropyMode,
+                                m_config.pictureMode,
+                                m_config.bitrateMode,
+                                m_config.multicast,
+                                m_config.afdCode,
+                                m_config.arAuto,
+                                m_config.bframeMode,
+                                m_config.chromaFormat,
+                                m_config.fieldOrder,
+                                m_config.gopMaxBcount,
+                                m_config.gopMaxLength,
+                                m_config.vbvSize,
+                                m_config.videoFormat,
+                                m_config.level)) {
                             runner.wait();
                         }
                         streamRunning = false;
@@ -698,20 +673,6 @@ void App::run() {
             else {
                 ImGui::Text("Off");
             }
-
-            //ImGui::Separator();
-            //ImGui::Text("Dialogue Box");
-
-            //ImGui::BeginChild("Console", ImVec2(0, 0), true);
-            //{
-            //    if (streamRunning.load()) {
-            //        for (const auto& line : consoleBuffer) {
-            //            ImGui::TextUnformatted(line.c_str());
-            //            consoleBuffer.pop_front();
-            //        }
-            //    }
-            //}
-            //ImGui::EndChild();
 
             ImGui::End();
         }
@@ -794,4 +755,3 @@ void App::Init() {
     init_info.CheckVkResultFn = check_vk_result;
     ImGui_ImplVulkan_Init(&init_info);
 }
-

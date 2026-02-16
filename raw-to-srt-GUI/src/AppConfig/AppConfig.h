@@ -8,7 +8,14 @@
 
 namespace ConfigHelper {
 struct Config {
-    std::string audioDevice;
+    std::string audioDevice1;
+    std::string audioDevice2;
+    std::string audioDevice3;
+    std::string audioDevice4;
+    std::string audioDevice5;
+    std::string audioDevice6;
+    std::string audioDevice7;
+    std::string audioDevice8;
     std::string videoDevice;
     int videoBitrate;
     int videoFramerate;
@@ -46,7 +53,14 @@ inline bool LoadConfig(std::string_view fileName, Config& config) {
 
     dataFile >> data;
 
-    config.audioDevice = data.value("audio_device", "OBS_Audio");
+    config.audioDevice1 = data.value("audio_device1", "OBS_Audio");
+    config.audioDevice2 = data.value("audio_device2", "OBS_Audio");
+    config.audioDevice3 = data.value("audio_device3", "OBS_Audio");
+    config.audioDevice4 = data.value("audio_device4", "OBS_Audio");
+    config.audioDevice5 = data.value("audio_device5", "OBS_Audio");
+    config.audioDevice6 = data.value("audio_device6", "OBS_Audio");
+    config.audioDevice7 = data.value("audio_device7", "OBS_Audio");
+    config.audioDevice8 = data.value("audio_device8", "OBS_Audio");
     config.videoDevice = data.value("video_device", "/dev/video0");
     config.videoBitrate = data.value("video_bitrate", 8000000);
     config.videoFramerate = data.value("video_framerate", 25);
@@ -76,7 +90,14 @@ inline bool LoadConfig(std::string_view fileName, Config& config) {
 
 inline void SaveConfig(std::string_view fileName, Config& config) {
     nlohmann::json json{
-        {"audio_device", config.audioDevice},
+        {"audio_device1", config.audioDevice1},
+        {"audio_device2", config.audioDevice2},
+        {"audio_device3", config.audioDevice3},
+        {"audio_device4", config.audioDevice4},
+        {"audio_device5", config.audioDevice5},
+        {"audio_device6", config.audioDevice6},
+        {"audio_device7", config.audioDevice7},
+        {"audio_device8", config.audioDevice8},
         {"video_device", config.videoDevice},
         {"video_bitrate", config.videoBitrate},
         {"video_framerate", config.videoFramerate},
